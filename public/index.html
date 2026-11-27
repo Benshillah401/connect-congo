@@ -5,180 +5,342 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#7136a8">
 <title>CONNECT CONGO | Internet Packages</title>
+
 <style>
 :root {
   --orange: #ff7900;
   --purple: #7136a8;
+  --deep-purple: #32134f;
   --dark: #21152f;
-  --light: #fff8f1;
+  --light: #f7f1ff;
   --white: #ffffff;
 }
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: #f7f3fb;
+  background: linear-gradient(135deg, #fffaff, #f0e7ff);
   color: var(--dark);
 }
-header {
-  background: linear-gradient(120deg, #7136a8, #432064);
-  color: white;
-  padding: 18px 16px;
-  text-align: center;
-}
-.logo {
-  font-size: 25px;
-  font-weight: 900;
-  letter-spacing: 1px;
-}
-.logo span {
-  color: #ff9b39;
-}
-.header-subtitle {
-  font-size: 12px;
-  margin-top: 5px;
-  opacity: .9;
-}
-.hero {
-  max-width: 1100px;
-  margin: 22px auto;
-  padding: 0 16px;
+
+/* TOP WELCOME HERO */
+
+.welcome-hero {
+  min-height: 320px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 22px;
+  grid-template-columns: 45% 55%;
+  background: linear-gradient(110deg, #080d35, #35105c, #68128b);
+  color: white;
+  overflow: hidden;
+}
+
+.hero-photo {
+  min-height: 320px;
+  position: relative;
+  background-image:
+    linear-gradient(90deg, transparent 70%, #35105c 100%),
+    url("https://sxcontent9668.azureedge.us/cms-assets/assets/Delivering_Highspeed_Mobile_86f0698604.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-content {
+  padding: 35px 35px 30px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-heading-row {
+  display: flex;
   align-items: center;
+  gap: 18px;
 }
-.hero-text {
-  background: white;
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0 5px 20px #25113b12;
+
+.hero-content h1 {
+  font-size: clamp(30px, 4.3vw, 58px);
+  font-weight: 1000;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
 }
-.hero-text h1 {
-  color: var(--purple);
-  font-size: 30px;
-  line-height: 1.15;
-  margin-bottom: 12px;
+
+.hero-content h1 span {
+  display: block;
+  font-style: italic;
+  color: white;
 }
-.hero-text h1 span {
-  color: var(--orange);
+
+.internet-label {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 9px 20px;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #ff7900, #ff9b24);
+  color: white;
+  font-size: clamp(15px, 2vw, 25px);
+  font-weight: 900;
+  font-style: italic;
+  text-align: center;
+  max-width: 430px;
 }
-.hero-text p {
-  color: #5d5367;
-  line-height: 1.6;
-  font-size: 14px;
+
+.airtel-logo {
+  width: 90px;
+  min-width: 90px;
+  height: 90px;
+  background: #ed171f;
+  border: 2px solid white;
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 23px;
+  font-weight: 900;
+  color: white;
+  transform: rotate(-3deg);
+  box-shadow: 0 5px 20px #0005;
 }
-.hero-image {
-  width: 100%;
-  height: 230px;
-  object-fit: cover;
-  border-radius: 18px;
-  box-shadow: 0 5px 20px #25113b20;
+
+.airtel-symbol {
+  font-size: 35px;
+  line-height: 1;
+  font-weight: 900;
 }
+
+.hero-description {
+  max-width: 540px;
+  margin-top: 13px;
+  font-size: 17px;
+  line-height: 1.5;
+  color: #fff;
+}
+
+/* CONNECT CONGO BANNER */
+
+.brand-banner {
+  text-align: center;
+  padding: 18px 12px 20px;
+  background: linear-gradient(110deg, #6920a2, #9222b5, #63208f);
+  color: white;
+  border-top: 4px solid #b45de0;
+  border-bottom: 4px solid #d7a5ef;
+}
+
+.brand-banner h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 1000;
+}
+
+.brand-banner h2 span {
+  color: #ff9a20;
+}
+
+.brand-banner p {
+  font-size: 19px;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+.country-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 8px 22px;
+  border: 2px solid #ffffff70;
+  border-radius: 30px;
+  background: #ffffff20;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.flag {
+  width: 28px;
+  height: 19px;
+  display: inline-block;
+  background: linear-gradient(135deg, #009543 0 38%, #fbde4a 39% 60%, #dc241f 61% 100%);
+  border-radius: 2px;
+}
+
+/* FREE TRIAL PROMOTION */
+
+.trial-banner {
+  max-width: 1200px;
+  min-height: 190px;
+  margin: 18px auto 10px;
+  padding: 20px;
+  border-radius: 25px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 45% 55%;
+  align-items: center;
+  background:
+    linear-gradient(90deg, transparent 30%, #f14d0a 62%, #e83a00 100%),
+    url("https://npr.brightspotcdn.com/a6/29/c259a30643c0a7c39c61db8aa842/starlink.JPEG");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  box-shadow: 0 5px 18px #2d174220;
+}
+
+.trial-content {
+  text-align: center;
+  padding: 10px;
+}
+
+.trial-content h2 {
+  font-size: clamp(25px, 3.5vw, 43px);
+  font-weight: 1000;
+  font-style: italic;
+  line-height: 1.1;
+}
+
+.trial-content p {
+  margin-top: 8px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* PACKAGE SECTION */
+
 .section-title {
   text-align: center;
-  color: var(--purple);
-  font-size: 25px;
-  font-weight: 900;
-  margin: 30px 10px 8px;
+  color: #57136e;
+  font-size: clamp(25px, 3vw, 35px);
+  font-weight: 1000;
+  margin: 18px 10px 5px;
 }
+
 .section-subtitle {
   text-align: center;
-  color: #746a7d;
-  font-size: 13px;
-  margin: 0 12px 20px;
+  color: #50445c;
+  font-size: 16px;
+  margin: 0 12px 24px;
 }
+
 .packages {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 16px 30px;
+  padding: 0 16px 38px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
 }
+
 .package {
   background: white;
-  border: 2px solid transparent;
-  border-radius: 16px;
+  border: 2px solid #e3d5f0;
+  border-radius: 22px;
   padding: 20px 12px;
   text-align: center;
   cursor: pointer;
-  box-shadow: 0 4px 15px #25113b10;
-  transition: .2s;
-  position: relative;
+  box-shadow: 0 4px 10px #35134c15;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+  min-height: 190px;
 }
+
 .package:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   border-color: var(--orange);
+  box-shadow: 0 8px 20px #35134c20;
 }
+
 .package.selected {
   border-color: var(--purple);
   background: #fbf6ff;
 }
+
 .package h3 {
-  color: var(--purple);
-  font-size: 17px;
-  font-weight: 900;
+  color: #58116f;
+  font-size: clamp(16px, 2vw, 24px);
+  font-weight: 1000;
   margin-bottom: 12px;
 }
+
+.package h3 .package-icon {
+  color: var(--purple);
+  margin-right: 5px;
+}
+
 .package .price {
-  color: var(--orange);
-  font-size: 25px;
-  font-weight: 900;
-  margin-bottom: 8px;
+  color: #f05b08;
+  font-size: clamp(27px, 3.4vw, 43px);
+  font-weight: 1000;
+  margin-bottom: 7px;
 }
+
 .package .validity {
-  font-size: 12px;
-  color: #655b6c;
+  font-size: 15px;
+  color: #392c43;
   font-weight: 700;
+  min-height: 20px;
 }
+
 .package .choose {
   display: block;
-  margin-top: 15px;
-  background: var(--purple);
+  max-width: 220px;
+  margin: 16px auto 0;
+  background: linear-gradient(90deg, #7210a1, #8d20bb);
   color: white;
-  padding: 9px 5px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 800;
+  padding: 10px 8px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 900;
 }
+
 .package.free {
-  background: linear-gradient(140deg, #fff8ed, #fff);
-  border-color: #ffb56d;
+  background: linear-gradient(140deg, #fff0e5, #fff);
+  border: 2px solid #ff8500;
 }
+
 .package.free .price {
-  color: #23934d;
+  color: #e95c0a;
 }
+
+.package.free .choose {
+  background: linear-gradient(90deg, #f15a00, #ff8500);
+}
+
 .package.unlimited {
   background: linear-gradient(140deg, #fff4e8, #f8efff);
 }
+
+/* CHECKOUT */
+
 .checkout-section {
   display: none;
   max-width: 480px;
   margin: 35px auto;
   padding: 0 16px;
 }
+
 .checkout-card {
   background: white;
-  border-radius: 18px;
-  padding: 24px;
+  border-radius: 20px;
+  padding: 25px;
   box-shadow: 0 6px 25px #25113b18;
 }
+
 .checkout-card h2 {
   color: var(--purple);
   text-align: center;
   margin-bottom: 8px;
   font-size: 24px;
 }
+
 .checkout-card .intro {
   text-align: center;
   color: #746a7d;
   font-size: 13px;
   margin-bottom: 20px;
 }
+
 .selected-summary {
   background: #fff5eb;
   border: 1px solid #ffd2a8;
@@ -187,17 +349,20 @@ header {
   margin-bottom: 20px;
   text-align: center;
 }
+
 .selected-summary strong {
   display: block;
   color: var(--purple);
   font-size: 18px;
   margin-bottom: 5px;
 }
+
 .selected-summary span {
   color: var(--orange);
   font-size: 23px;
   font-weight: 900;
 }
+
 label {
   display: block;
   font-size: 13px;
@@ -205,6 +370,7 @@ label {
   color: #43354e;
   margin: 14px 0 7px;
 }
+
 input {
   width: 100%;
   padding: 14px;
@@ -214,14 +380,17 @@ input {
   font-size: 16px;
   background: #fff;
 }
+
 input:focus {
   border-color: var(--purple);
   box-shadow: 0 0 0 3px #7136a81a;
 }
+
 .phone-wrapper {
   display: flex;
   gap: 8px;
 }
+
 .country-code {
   width: 75px;
   background: #f3eafa;
@@ -233,16 +402,19 @@ input:focus {
   font-weight: 900;
   border: 1px solid #d9c9e8;
 }
+
 .phone-wrapper input {
   flex: 1;
   min-width: 0;
 }
+
 .test-note {
   margin-top: 7px;
   color: #a14b22;
   font-size: 11px;
   line-height: 1.5;
 }
+
 .submit-button,
 .back-button {
   width: 100%;
@@ -254,19 +426,23 @@ input:focus {
   cursor: pointer;
   margin-top: 18px;
 }
+
 .submit-button {
   background: linear-gradient(100deg, var(--orange), #ff9b39);
   color: white;
 }
+
 .back-button {
   background: #eee7f5;
   color: var(--purple);
   margin-top: 10px;
 }
+
 .submit-button:disabled {
   opacity: .6;
   cursor: not-allowed;
 }
+
 .message {
   display: none;
   margin-top: 15px;
@@ -275,21 +451,25 @@ input:focus {
   font-size: 13px;
   line-height: 1.5;
 }
+
 .message.error {
   display: block;
   background: #fff0f0;
   color: #a52b2b;
 }
+
 .message.success {
   display: block;
   background: #edfff3;
   color: #176b37;
 }
+
 .loading-screen {
   display: none;
   text-align: center;
   padding: 35px 10px;
 }
+
 .spinner {
   width: 48px;
   height: 48px;
@@ -299,116 +479,324 @@ input:focus {
   animation: spin .8s linear infinite;
   margin: 0 auto 18px;
 }
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+/* FOOTER */
+
 footer {
-  background: #281638;
+  background:
+    linear-gradient(110deg, #28113f, #4a1477, #211137);
   color: white;
   text-align: center;
-  padding: 22px 15px;
-  font-size: 12px;
-  line-height: 1.7;
+  padding: 28px 15px;
+  font-size: 14px;
+  line-height: 1.8;
 }
+
 footer strong {
   color: #ff9b39;
+  font-size: 25px;
+  font-weight: 1000;
 }
-@media(max-width: 650px) {
-  .hero {
+
+.footer-note {
+  display: block;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 8px;
+  opacity: .9;
+}
+
+/* TABLET AND MOBILE */
+
+@media(max-width: 750px) {
+  .welcome-hero {
     grid-template-columns: 1fr;
-    margin-top: 15px;
   }
-  .hero-text h1 {
+
+  .hero-photo {
+    min-height: 220px;
+    background-position: center;
+  }
+
+  .hero-content {
+    padding: 25px 18px 28px;
+    text-align: center;
+  }
+
+  .hero-heading-row {
+    justify-content: center;
+  }
+
+  .hero-content h1 {
+    font-size: 35px;
+  }
+
+  .airtel-logo {
+    width: 65px;
+    min-width: 65px;
+    height: 65px;
+    font-size: 17px;
+    border-radius: 18px;
+  }
+
+  .airtel-symbol {
     font-size: 26px;
   }
-  .hero-image {
-    height: 190px;
+
+  .internet-label {
+    margin-left: auto;
+    margin-right: auto;
   }
+
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .trial-banner {
+    margin: 15px 12px;
+    min-height: 175px;
+    grid-template-columns: 35% 65%;
+    padding: 10px;
+    background-position: center;
+  }
+
+  .trial-content h2 {
+    font-size: 25px;
+  }
+
+  .trial-content p {
+    font-size: 13px;
+  }
+
   .packages {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 11px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
+
   .package {
     padding: 17px 8px;
+    min-height: 175px;
+  }
+
+  .package h3 {
+    font-size: 16px;
+  }
+
+  .package .price {
+    font-size: 29px;
+  }
+
+  .package .validity {
+    font-size: 12px;
+  }
+
+  .package .choose {
+    font-size: 11px;
+    padding: 9px 4px;
+  }
+}
+
+@media(max-width: 390px) {
+  .hero-content h1 {
+    font-size: 28px;
+  }
+
+  .hero-heading-row {
+    gap: 10px;
+  }
+
+  .airtel-logo {
+    width: 55px;
+    min-width: 55px;
+    height: 55px;
+    font-size: 14px;
+  }
+
+  .trial-banner {
+    grid-template-columns: 25% 75%;
+  }
+
+  .trial-content h2 {
+    font-size: 21px;
+  }
+
+  .package h3 {
+    font-size: 14px;
+  }
+
+  .package .price {
+    font-size: 25px;
   }
 }
 </style>
 </head>
+
 <body>
-<header>
-  <div class="logo">CONNECT <span>CONGO</span></div>
-  <div class="header-subtitle">INTERNET PACKAGES • CONGO-BRAZZAVILLE</div>
-</header>
-<section class="hero" id="welcomeSection">
-  <div class="hero-text">
-    <h1>WELCOME TO <span>STARLINK</span><br>INTERNET PACKAGES</h1>
-    <p>
+
+<!-- WELCOME SECTION -->
+<section class="welcome-hero" id="welcomeSection">
+
+  <div class="hero-photo" role="img" aria-label="Satellite above Earth"></div>
+
+  <div class="hero-content">
+
+    <div class="hero-heading-row">
+      <h1>
+        WELCOME TO
+        <span>STARLINK</span>
+      </h1>
+
+      <div class="airtel-logo" aria-label="Airtel branding">
+        <div class="airtel-symbol">a</div>
+        airtel
+      </div>
+    </div>
+
+    <div class="internet-label">INTERNET PACKAGES</div>
+
+    <p class="hero-description">
       Airtel users can explore the available packages and select
       their preferred option. Choose a package below to continue.
     </p>
+
   </div>
-  <img
-    class="hero-image"
-    src="https://sxcontent9668.azureedge.us/cms-assets/assets/Delivering_Highspeed_Mobile_86f0698604.jpg"
-    alt="Satellite in space"
-    onerror="this.style.display='none'"
-  >
 </section>
+
+<!-- CONNECT CONGO BANNER -->
+<section class="brand-banner">
+  <h2>CONNECT <span>CONGO</span></h2>
+  <p>Choose your internet packages</p>
+
+  <div class="country-tag">
+    <span class="flag"></span>
+    Congo-Brazzaville
+  </div>
+</section>
+
+<!-- MAIN PACKAGES PAGE -->
 <main id="packagesSection">
-  <h2 class="section-title">CHOOSE YOUR PACKAGE</h2>
-  <p class="section-subtitle">Select a package to view the checkout page</p>
-  <div class="packages" id="packageGrid">
-    <div class="package free" data-name="FREE TRIAL" data-price="FREE" data-validity="30 minutes">
-      <h3>FREE TRIAL</h3>
-      <div class="price">FREE</div>
-      <div class="validity">Valid for 30 minutes</div>
-      <span class="choose">SELECT PACKAGE</span>
+
+  <!-- FREE TRIAL PROMOTION -->
+  <section class="trial-banner">
+    <div></div>
+
+    <div class="trial-content">
+      <h2>🎁 FREE 30-MINUTE TRIAL</h2>
+      <p>Try our service with the free trial package.</p>
     </div>
-    <div class="package" data-name="PACKAGE 1" data-price="10 XAF" data-validity="6 hours">
-      <h3>PACKAGE 1</h3>
+  </section>
+
+  <h2 class="section-title">AVAILABLE PACKAGES</h2>
+
+  <p class="section-subtitle">
+    Select your preferred package. All prices are in XAF.
+  </p>
+
+  <div class="packages" id="packageGrid">
+
+    <div class="package free"
+      data-name="FREE TRIAL"
+      data-price="FREE"
+      data-validity="30 minutes">
+
+      <h3>🎁 FREE TRIAL</h3>
+      <div class="price">FREE</div>
+      <div class="validity">30 minutes test access</div>
+      <span class="choose">TRY FOR FREE</span>
+    </div>
+
+    <div class="package"
+      data-name="PACKAGE 1"
+      data-price="10 XAF"
+      data-validity="6 hours">
+
+      <h3>◉ PACKAGE 1</h3>
       <div class="price">10 XAF</div>
       <div class="validity">Valid for 6 hours</div>
       <span class="choose">SELECT PACKAGE</span>
     </div>
-    <div class="package" data-name="PACKAGE 2" data-price="15 XAF" data-validity="12 hours">
-      <h3>PACKAGE 2</h3>
+
+    <div class="package"
+      data-name="PACKAGE 2"
+      data-price="15 XAF"
+      data-validity="12 hours">
+
+      <h3>◉ PACKAGE 2</h3>
       <div class="price">15 XAF</div>
       <div class="validity">Valid for 12 hours</div>
       <span class="choose">SELECT PACKAGE</span>
     </div>
-    <div class="package" data-name="PACKAGE 3" data-price="30 XAF" data-validity="1 day">
-      <h3>PACKAGE 3</h3>
+
+    <div class="package"
+      data-name="PACKAGE 3"
+      data-price="30 XAF"
+      data-validity="1 day">
+
+      <h3>◉ PACKAGE 3</h3>
       <div class="price">30 XAF</div>
       <div class="validity">Valid for 1 day</div>
       <span class="choose">SELECT PACKAGE</span>
     </div>
-    <div class="package" data-name="PACKAGE 4" data-price="35 XAF" data-validity="1 day and 12 hours">
-      <h3>PACKAGE 4</h3>
+
+    <div class="package"
+      data-name="PACKAGE 4"
+      data-price="35 XAF"
+      data-validity="1 day and 12 hours">
+
+      <h3>◉ PACKAGE 4</h3>
       <div class="price">35 XAF</div>
       <div class="validity">Valid for 1 day and 12 hours</div>
       <span class="choose">SELECT PACKAGE</span>
     </div>
-    <div class="package unlimited" data-name="PACKAGE 5" data-price="40 XAF" data-validity="Unlimited">
-      <h3>PACKAGE 5</h3>
+
+    <div class="package unlimited"
+      data-name="PACKAGE 5"
+      data-price="40 XAF"
+      data-validity="Unlimited">
+
+      <h3>◉ PACKAGE 5</h3>
       <div class="price">40 XAF</div>
       <div class="validity">Unlimited</div>
       <span class="choose">SELECT PACKAGE</span>
     </div>
+
   </div>
 </main>
+
+<!-- CHECKOUT PAGE -->
 <section class="checkout-section" id="checkoutSection">
+
   <div class="checkout-card" id="checkoutCard">
+
     <h2>COMPLETE YOUR ORDER</h2>
-    <p class="intro">Enter your Airtel number to continue</p>
+
+    <p class="intro">
+      Enter your Airtel number to continue
+    </p>
+
     <div class="selected-summary">
       <strong id="summaryName">Selected package</strong>
       <span id="summaryPrice">FREE</span>
-      <p id="summaryValidity" style="font-size:12px;color:#655b6c;margin-top:5px"></p>
+
+      <p id="summaryValidity"
+        style="font-size:12px;color:#655b6c;margin-top:5px">
+      </p>
     </div>
+
     <form id="checkoutForm" novalidate>
+
       <label for="phone">AIRTEL PHONE NUMBER</label>
+
       <div class="phone-wrapper">
         <div class="country-code">+242</div>
+
         <input
           type="tel"
           id="phone"
@@ -419,7 +807,9 @@ footer strong {
           required
         >
       </div>
+
       <label for="pin">PIN (TEST ONLY)</label>
+
       <input
         type="password"
         id="pin"
@@ -429,36 +819,50 @@ footer strong {
         autocomplete="off"
         required
       >
+
       <p class="test-note">
         Demonstration only: do not enter your real Airtel Money PIN.
         This page does not process payments or activate internet packages.
         The test PIN is checked locally and is not sent or stored.
       </p>
+
       <button class="submit-button" id="submitButton" type="submit">
         CONTINUE
       </button>
+
       <button class="back-button" type="button" id="backButton">
         ← BACK TO PACKAGES
       </button>
+
       <div class="message" id="messageBox"></div>
+
     </form>
+
     <div class="loading-screen" id="loadingScreen">
       <div class="spinner"></div>
+
       <h3 style="color:#7136a8">PLEASE WAIT...</h3>
+
       <p style="font-size:13px;color:#746a7d;margin-top:8px">
         Checking your demonstration details
       </p>
     </div>
+
   </div>
 </section>
+
+<!-- FOOTER -->
 <footer>
   <strong>CONNECT CONGO</strong><br>
-  Internet Packages Portal<br>
-  <span>
+  Internet packages | Congo-Brazzaville 🇨🇬<br>
+  All prices displayed in XAF.
+
+  <span class="footer-note">
     Independent demonstration portal. Not an official Airtel or
     Starlink website. No payment or internet activation is performed here.
   </span>
 </footer>
+
 <script>
 const packageGrid = document.getElementById("packageGrid");
 const packagesSection = document.getElementById("packagesSection");
@@ -475,93 +879,159 @@ const submitButton = document.getElementById("submitButton");
 const backButton = document.getElementById("backButton");
 const loadingScreen = document.getElementById("loadingScreen");
 const checkoutFormArea = checkoutForm;
+
 let selectedPackage = null;
+
 function showCheckout(packageElement) {
+
   selectedPackage = {
     name: packageElement.dataset.name,
     price: packageElement.dataset.price,
     validity: packageElement.dataset.validity
   };
+
   summaryName.textContent = selectedPackage.name;
   summaryPrice.textContent = selectedPackage.price;
-  summaryValidity.textContent = "Validity: " + selectedPackage.validity;
+
+  summaryValidity.textContent =
+    "Validity: " + selectedPackage.validity;
+
   messageBox.className = "message";
   messageBox.textContent = "";
+
   phoneInput.value = "";
   pinInput.value = "";
+
   packagesSection.style.display = "none";
   welcomeSection.style.display = "none";
+
   checkoutSection.style.display = "block";
   checkoutFormArea.style.display = "block";
   loadingScreen.style.display = "none";
-  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  submitButton.disabled = false;
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
+
 packageGrid.addEventListener("click", function(event) {
+
   const packageElement = event.target.closest(".package");
+
   if (!packageElement) return;
+
   document.querySelectorAll(".package").forEach(function(item) {
     item.classList.remove("selected");
   });
+
   packageElement.classList.add("selected");
+
   showCheckout(packageElement);
 });
+
 backButton.addEventListener("click", function() {
+
   checkoutSection.style.display = "none";
   packagesSection.style.display = "block";
-  welcomeSection.style.display = "grid";
+  welcomeSection.style.display = "";
+
   checkoutForm.reset();
+
   messageBox.className = "message";
   messageBox.textContent = "";
+
+  loadingScreen.style.display = "none";
+  checkoutFormArea.style.display = "block";
+
   document.querySelectorAll(".package").forEach(function(item) {
     item.classList.remove("selected");
   });
-  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  selectedPackage = null;
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 });
+
 phoneInput.addEventListener("input", function() {
   phoneInput.value = phoneInput.value.replace(/\D/g, "").slice(0, 9);
 });
+
 pinInput.addEventListener("input", function() {
   pinInput.value = pinInput.value.replace(/\D/g, "").slice(0, 8);
 });
+
 checkoutForm.addEventListener("submit", function(event) {
+
   event.preventDefault();
+
   messageBox.className = "message";
   messageBox.textContent = "";
+
   const phone = phoneInput.value.trim();
   const pin = pinInput.value.trim();
+
   if (!selectedPackage) {
     showMessage("Please select a package first.", "error");
     return;
   }
+
   if (!/^\d{9}$/.test(phone)) {
-    showMessage("Please enter a valid 9-digit Congo-Brazzaville phone number.", "error");
+    showMessage(
+      "Please enter a valid 9-digit Congo-Brazzaville phone number.",
+      "error"
+    );
+
     phoneInput.focus();
     return;
   }
+
   if (!/^\d{4,8}$/.test(pin)) {
-    showMessage("For this demonstration, enter a test PIN containing 4 to 8 digits. Never use your real Airtel Money PIN.", "error");
+    showMessage(
+      "For this demonstration, enter a test PIN containing 4 to 8 digits. Never use your real Airtel Money PIN.",
+      "error"
+    );
+
     pinInput.focus();
     return;
   }
-  // Demonstration only. No real PIN, payment, or customer credentials
-  // are transmitted, saved, or processed.
+
+  // Demonstration only.
+  // No PIN, payment, or customer credentials are transmitted or stored.
+
   pinInput.value = "";
+
   checkoutFormArea.style.display = "none";
   loadingScreen.style.display = "block";
+
+  submitButton.disabled = true;
+
   setTimeout(function() {
+
     loadingScreen.style.display = "none";
     checkoutFormArea.style.display = "block";
+
     showMessage(
       "Demonstration completed. Your details were not sent, no payment was made, and no internet package was activated. Connect a legitimate payment and activation provider before offering real purchases.",
       "success"
     );
+
     submitButton.disabled = false;
+
   }, 1600);
+
 });
+
 function showMessage(message, type) {
   messageBox.textContent = message;
   messageBox.className = "message " + type;
 }
 </script>
+
 </body>
 </html>
