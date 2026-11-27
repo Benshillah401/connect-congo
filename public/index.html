@@ -12,7 +12,6 @@
   --purple: #7136a8;
   --dark: #241338;
   --light: #f7f3fc;
-  --white: #ffffff;
 }
 
 * {
@@ -72,7 +71,6 @@ header p {
   border-radius: 17px;
   margin-bottom: 25px;
   text-align: center;
-  box-shadow: 0 5px 15px #ff790033;
 }
 
 .trial-banner h2 {
@@ -108,21 +106,14 @@ header p {
   border-radius: 15px;
   padding: 18px 12px;
   border: 2px solid #eee5f7;
-  position: relative;
   text-align: center;
   cursor: pointer;
   transition: .2s;
-  min-width: 0;
 }
 
 .package:hover {
   border-color: var(--orange);
   transform: translateY(-3px);
-}
-
-.package.selected {
-  border: 3px solid var(--purple);
-  background: #f4eaff;
 }
 
 .package.free {
@@ -175,37 +166,139 @@ header p {
   background: var(--orange);
 }
 
-.checkout {
-  background: white;
-  border-radius: 17px;
-  padding: 21px;
-  margin-top: 25px;
-  box-shadow: 0 4px 20px #00000009;
+footer {
+  background: #241338;
+  color: white;
+  padding: 25px 15px;
+  text-align: center;
+  margin-top: 35px;
+  font-size: 12px;
+  line-height: 1.8;
 }
 
-.checkout h2 {
-  font-size: 21px;
-  margin-bottom: 17px;
+/* CHECKOUT SCREEN */
+
+#checkoutPage {
+  display: none;
+  min-height: 100vh;
+  background: var(--light);
 }
 
-label {
-  font-size: 13px;
+.checkout-header {
+  background: linear-gradient(120deg, #7136a8, #a04ad1);
+  color: white;
+  text-align: center;
+  padding: 24px 15px;
+}
+
+.checkout-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 22px 15px;
+}
+
+.back-btn {
+  border: none;
+  background: #eee3f8;
+  color: var(--purple);
+  padding: 11px 16px;
+  border-radius: 9px;
   font-weight: 900;
-  display: block;
+  cursor: pointer;
+  margin-bottom: 18px;
+}
+
+.checkout-card {
+  background: white;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 5px 22px #0000000d;
+}
+
+.checkout-card h2 {
+  font-size: 22px;
   margin-bottom: 8px;
 }
 
-input {
-  width: 100%;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  font-size: 16px;
-  outline: none;
-  margin-bottom: 17px;
+.checkout-subtitle {
+  color: #777;
+  font-size: 13px;
+  margin-bottom: 22px;
+  line-height: 1.6;
 }
 
-input:focus {
+.selected-summary {
+  background: linear-gradient(120deg, #fff1e3, #f2e7fc);
+  border-left: 5px solid var(--orange);
+  border-radius: 10px;
+  padding: 17px;
+  margin-bottom: 23px;
+  line-height: 1.8;
+}
+
+.selected-summary .package-selected-name {
+  font-size: 19px;
+  font-weight: 900;
+  color: var(--purple);
+}
+
+.selected-summary .package-selected-price {
+  font-size: 25px;
+  font-weight: 900;
+  color: var(--orange);
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 9px;
+}
+
+.input-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background: white;
+}
+
+.input-wrap:focus-within {
+  border: 2px solid var(--purple);
+}
+
+.country-code {
+  background: #f2e7fc;
+  color: var(--purple);
+  padding: 16px 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.input-wrap input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 16px 10px;
+  font-size: 16px;
+  margin: 0;
+}
+
+.pin-input {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.pin-input:focus {
+  outline: none;
   border: 2px solid var(--purple);
 }
 
@@ -217,54 +310,69 @@ input:focus {
   padding: 12px;
   font-size: 12px;
   line-height: 1.6;
-  margin: 0 0 17px;
+  margin-bottom: 20px;
 }
 
-.selected-summary {
-  background: #f4edfa;
-  border-left: 4px solid var(--orange);
-  border-radius: 9px;
-  padding: 14px;
-  margin-bottom: 18px;
-  font-size: 14px;
-  line-height: 1.8;
-}
-
-.submit-btn {
+.continue-btn {
   width: 100%;
   border: none;
   border-radius: 10px;
   background: linear-gradient(100deg, #7136a8, #ff7900);
   color: white;
   font-weight: 900;
-  padding: 16px;
+  padding: 17px;
   font-size: 16px;
   cursor: pointer;
 }
 
-.submit-btn:disabled {
-  opacity: .5;
-  cursor: not-allowed;
-}
-
-.message {
+.result-message {
   display: none;
-  background: #f4edfa;
-  padding: 15px;
+  background: #f2e7fc;
   border-radius: 10px;
-  margin-top: 15px;
+  padding: 15px;
+  margin-top: 17px;
   font-size: 13px;
   line-height: 1.7;
 }
 
-footer {
-  background: #241338;
-  color: white;
-  padding: 25px 15px;
+/* LOADING SCREEN */
+
+#loadingScreen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: white;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   text-align: center;
-  margin-top: 35px;
-  font-size: 12px;
-  line-height: 1.8;
+}
+
+.spinner {
+  width: 52px;
+  height: 52px;
+  border: 5px solid #eee3f8;
+  border-top: 5px solid var(--orange);
+  border-right: 5px solid var(--purple);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+#loadingScreen h3 {
+  color: var(--purple);
+  font-size: 19px;
+}
+
+#loadingScreen p {
+  color: #777;
+  font-size: 13px;
+  margin-top: 8px;
 }
 
 @media(min-width:650px) {
@@ -281,6 +389,10 @@ footer {
 
 <body>
 
+<!-- PACKAGE SELECTION PAGE -->
+
+<div id="packagesPage">
+
 <header>
   <div class="logo">CONNECT <span>CONGO</span></div>
   <p>Choose your internet package</p>
@@ -291,11 +403,11 @@ footer {
 
   <section class="trial-banner">
     <h2>🎁 FREE 30-MINUTE TRIAL</h2>
-    <p>Try our service with the free test package. No package payment required for the trial.</p>
+    <p>Try our service with the free test package.</p>
   </section>
 
   <h2 class="section-title">AVAILABLE PACKAGES</h2>
-  <p class="subtitle">Select your preferred package below. All prices are in XAF.</p>
+  <p class="subtitle">Select your preferred package. All prices are in XAF.</p>
 
   <div class="packages" id="packages">
 
@@ -349,150 +461,213 @@ footer {
     </div>
 
   </div>
-
-  <section class="checkout">
-    <h2>COMPLETE YOUR SELECTION</h2>
-
-    <label for="phone">Congo-Brazzaville Airtel Number</label>
-    <input
-      type="tel"
-      id="phone"
-      placeholder="+242 06 XXX XX XX"
-      maxlength="16"
-      autocomplete="tel"
-    >
-
-    <label for="testPin">PIN (TEST ONLY)</label>
-    <input
-      type="password"
-      id="testPin"
-      placeholder="Enter a test PIN only"
-      maxlength="8"
-      inputmode="numeric"
-      autocomplete="off"
-    >
-
-    <div class="pin-note">
-      Test field only. Never enter your real Airtel Money PIN.
-      This test PIN is checked in your browser and is never saved
-      or sent to a server. Actual payments must use an authorized
-      secure Airtel payment process.
-    </div>
-
-    <div class="selected-summary" id="summary">
-      <strong>Selected package:</strong> Please select a package above.
-    </div>
-
-    <button class="submit-btn" id="submitOrder" disabled>
-      CONTINUE
-    </button>
-
-    <div class="message" id="message"></div>
-  </section>
-
 </main>
 
 <footer>
-  <strong>CONNECT CONGO</strong>
-  <br>
-  Internet Packages | Congo-Brazzaville 🇨🇬
-  <br>
+  <strong>CONNECT CONGO</strong><br>
+  Internet Packages | Congo-Brazzaville 🇨🇬<br>
   All prices displayed in XAF.
 </footer>
 
+</div>
+
+<!-- LOADING SCREEN -->
+
+<div id="loadingScreen">
+  <div class="spinner"></div>
+  <h3>CONNECT CONGO</h3>
+  <p>Preparing your selected package...</p>
+</div>
+
+<!-- SEPARATE CHECKOUT PAGE -->
+
+<div id="checkoutPage">
+
+  <div class="checkout-header">
+    <div class="logo">CONNECT <span>CONGO</span></div>
+    <p>Secure package selection</p>
+  </div>
+
+  <main class="checkout-container">
+
+    <button class="back-btn" id="backButton">← BACK TO PACKAGES</button>
+
+    <section class="checkout-card">
+
+      <h2>Complete Your Selection</h2>
+      <p class="checkout-subtitle">
+        Enter your Congo-Brazzaville Airtel number to continue.
+      </p>
+
+      <div class="selected-summary">
+        <div>YOUR SELECTED PACKAGE</div>
+        <div class="package-selected-name" id="selectedName"></div>
+        <div class="package-selected-price" id="selectedPrice"></div>
+      </div>
+
+      <form id="checkoutForm">
+
+        <label for="phone">Airtel Mobile Number</label>
+
+        <div class="input-wrap">
+          <span class="country-code">🇨🇬 +242</span>
+          <input
+            type="tel"
+            id="phone"
+            placeholder="06 XXX XX XX"
+            maxlength="9"
+            inputmode="numeric"
+            autocomplete="tel-national"
+            required
+          >
+        </div>
+
+        <label for="testPin">PIN (TEST ONLY)</label>
+
+        <input
+          class="pin-input"
+          type="password"
+          id="testPin"
+          placeholder="Enter a test PIN only"
+          maxlength="8"
+          inputmode="numeric"
+          autocomplete="off"
+          required
+        >
+
+        <div class="pin-note">
+          This is a test-only field. Never enter your real Airtel Money PIN.
+          The test PIN is checked locally in your browser and is never
+          stored or transmitted. Real payments must use an authorized
+          secure Airtel payment process.
+        </div>
+
+        <button type="submit" class="continue-btn">
+          CONTINUE
+        </button>
+
+      </form>
+
+      <div class="result-message" id="resultMessage"></div>
+
+    </section>
+  </main>
+
+  <footer>
+    CONNECT CONGO<br>
+    Congo-Brazzaville 🇨🇬
+  </footer>
+
+</div>
+
 <script>
 const packageCards = document.querySelectorAll(".package");
-const summary = document.getElementById("summary");
+const packagesPage = document.getElementById("packagesPage");
+const checkoutPage = document.getElementById("checkoutPage");
+const loadingScreen = document.getElementById("loadingScreen");
+
+const selectedName = document.getElementById("selectedName");
+const selectedPrice = document.getElementById("selectedPrice");
+
+const backButton = document.getElementById("backButton");
+const checkoutForm = document.getElementById("checkoutForm");
+
 const phone = document.getElementById("phone");
 const testPin = document.getElementById("testPin");
-const submit = document.getElementById("submitOrder");
-const message = document.getElementById("message");
+const resultMessage = document.getElementById("resultMessage");
 
 let selectedPackage = null;
 
+function openCheckout(card) {
+  selectedPackage = {
+    name: card.dataset.name,
+    price: Number(card.dataset.price)
+  };
+
+  selectedName.textContent = selectedPackage.name;
+
+  selectedPrice.textContent = selectedPackage.price === 0
+    ? "FREE"
+    : selectedPackage.price + " XAF";
+
+  resultMessage.style.display = "none";
+  checkoutForm.reset();
+
+  packagesPage.style.display = "none";
+  checkoutPage.style.display = "none";
+  loadingScreen.style.display = "flex";
+
+  setTimeout(() => {
+    loadingScreen.style.display = "none";
+    checkoutPage.style.display = "block";
+    window.scrollTo(0, 0);
+  }, 900);
+}
+
 packageCards.forEach(card => {
   card.addEventListener("click", () => {
-    packageCards.forEach(item => item.classList.remove("selected"));
-
-    card.classList.add("selected");
-
-    selectedPackage = {
-      name: card.dataset.name,
-      price: Number(card.dataset.price)
-    };
-
-    summary.innerHTML = `
-      <strong>Selected:</strong> ${selectedPackage.name}<br>
-      <strong>Price:</strong> ${
-        selectedPackage.price === 0
-          ? "FREE"
-          : selectedPackage.price + " XAF"
-      }
-    `;
-
-    submit.disabled = false;
-    submit.textContent = selectedPackage.price === 0
-      ? "REQUEST FREE TRIAL"
-      : "CONTINUE";
-
-    message.style.display = "none";
+    openCheckout(card);
   });
 });
 
+backButton.addEventListener("click", () => {
+  checkoutPage.style.display = "none";
+  packagesPage.style.display = "block";
+  window.scrollTo(0, 0);
+});
+
 phone.addEventListener("input", () => {
-  phone.value = phone.value.replace(/[^\d+ ]/g, "");
+  phone.value = phone.value.replace(/\D/g, "").slice(0, 9);
 });
 
 testPin.addEventListener("input", () => {
-  testPin.value = testPin.value.replace(/\D/g, "");
+  testPin.value = testPin.value.replace(/\D/g, "").slice(0, 8);
 });
 
-submit.addEventListener("click", () => {
-  const number = phone.value.replace(/[\s+]/g, "");
-  const pin = testPin.value;
+checkoutForm.addEventListener("submit", event => {
+  event.preventDefault();
+
+  const localNumber = phone.value.trim();
+  const testPinValue = testPin.value.trim();
 
   if (!selectedPackage) {
-    alert("Please select a package.");
+    alert("Please select a package first.");
     return;
   }
 
-  if (!/^242\d{9}$/.test(number)) {
-    alert("Please enter a valid Congo-Brazzaville phone number with country code +242.");
+  if (!/^\d{9}$/.test(localNumber)) {
+    alert("Enter the 9 digits after +242.");
     phone.focus();
     return;
   }
 
-  if (!/^\d{4,8}$/.test(pin)) {
+  if (!/^\d{4,8}$/.test(testPinValue)) {
     alert("Enter a test PIN containing 4 to 8 digits.");
     testPin.focus();
     return;
   }
 
-  // The test PIN is not stored, logged, or transmitted.
-  // Clear it immediately after local validation.
+  const fullNumber = "+242" + localNumber;
+
+  // Never store or send the test PIN.
   testPin.value = "";
 
-  message.style.display = "block";
+  resultMessage.style.display = "block";
 
-  if (selectedPackage.price === 0) {
-    message.innerHTML = `
-      <strong>Free trial selection prepared!</strong><br>
-      Phone: +${number}<br>
-      Package: Free Trial<br>
-      Duration: 30 minutes<br><br>
-      This is a local checkout test. The free trial
-      still requires activation through a connected service backend.
-    `;
-  } else {
-    message.innerHTML = `
-      <strong>Package selection prepared!</strong><br>
-      Phone: +${number}<br>
-      Package: ${selectedPackage.name}<br>
-      Amount: ${selectedPackage.price} XAF<br><br>
-      This is a local checkout test. No payment has been made.
-      Secure Airtel payment integration is still required.
-    `;
-  }
+  resultMessage.innerHTML = `
+    <strong>Selection prepared successfully!</strong><br><br>
+    Airtel Number: ${fullNumber}<br>
+    Package: ${selectedPackage.name}<br>
+    Amount: ${
+      selectedPackage.price === 0
+        ? "FREE"
+        : selectedPackage.price + " XAF"
+    }<br><br>
+    This is a checkout interface test.
+    No payment has been made and no service has been activated.
+  `;
+
+  checkoutForm.reset();
 });
 </script>
 
