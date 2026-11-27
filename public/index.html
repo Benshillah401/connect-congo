@@ -121,7 +121,7 @@ header p {
 }
 
 .package.selected {
-  border: 2px solid var(--purple);
+  border: 3px solid var(--purple);
   background: #f4eaff;
 }
 
@@ -132,7 +132,7 @@ header p {
 }
 
 .package-name {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 900;
   color: var(--purple);
 }
@@ -142,19 +142,20 @@ header p {
 }
 
 .package-price {
-  font-size: 27px;
+  font-size: 29px;
   font-weight: 900;
   margin-top: 12px;
   color: var(--orange);
 }
 
 .currency {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 900;
 }
 
 .package-description {
   font-size: 12px;
+  font-weight: bold;
   color: #777;
   margin-top: 9px;
 }
@@ -164,8 +165,8 @@ header p {
   background: var(--purple);
   color: white;
   font-size: 11px;
-  font-weight: bold;
-  padding: 7px 15px;
+  font-weight: 900;
+  padding: 8px 15px;
   border-radius: 20px;
   margin-top: 14px;
 }
@@ -189,7 +190,7 @@ header p {
 
 label {
   font-size: 13px;
-  font-weight: bold;
+  font-weight: 900;
   display: block;
   margin-bottom: 8px;
 }
@@ -205,7 +206,18 @@ input {
 }
 
 input:focus {
-  border-color: var(--purple);
+  border: 2px solid var(--purple);
+}
+
+.pin-note {
+  background: #fff3e7;
+  border-left: 4px solid var(--orange);
+  color: #6d3a0b;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 0 0 17px;
 }
 
 .selected-summary {
@@ -282,7 +294,7 @@ footer {
     <p>Try our service with the free test package. No package payment required for the trial.</p>
   </section>
 
-  <h2 class="section-title">Available Packages</h2>
+  <h2 class="section-title">AVAILABLE PACKAGES</h2>
   <p class="subtitle">Select your preferred package below. All prices are in XAF.</p>
 
   <div class="packages" id="packages">
@@ -339,7 +351,7 @@ footer {
   </div>
 
   <section class="checkout">
-    <h2>Complete Your Selection</h2>
+    <h2>COMPLETE YOUR SELECTION</h2>
 
     <label for="phone">Congo-Brazzaville Airtel Number</label>
     <input
@@ -350,8 +362,25 @@ footer {
       autocomplete="tel"
     >
 
+    <label for="testPin">PIN (TEST ONLY)</label>
+    <input
+      type="password"
+      id="testPin"
+      placeholder="Enter a test PIN only"
+      maxlength="8"
+      inputmode="numeric"
+      autocomplete="off"
+    >
+
+    <div class="pin-note">
+      Test field only. Never enter your real Airtel Money PIN.
+      This test PIN is checked in your browser and is never saved
+      or sent to a server. Actual payments must use an authorized
+      secure Airtel payment process.
+    </div>
+
     <div class="selected-summary" id="summary">
-      Selected package: Please select a package above.
+      <strong>Selected package:</strong> Please select a package above.
     </div>
 
     <button class="submit-btn" id="submitOrder" disabled>
@@ -372,18 +401,18 @@ footer {
 </footer>
 
 <script>
-const packages = document.querySelectorAll(".package");
+const packageCards = document.querySelectorAll(".package");
 const summary = document.getElementById("summary");
 const phone = document.getElementById("phone");
+const testPin = document.getElementById("testPin");
 const submit = document.getElementById("submitOrder");
 const message = document.getElementById("message");
 
 let selectedPackage = null;
 
-packages.forEach(card => {
+packageCards.forEach(card => {
   card.addEventListener("click", () => {
-
-    packages.forEach(item => item.classList.remove("selected"));
+    packageCards.forEach(item => item.classList.remove("selected"));
 
     card.classList.add("selected");
 
@@ -394,16 +423,18 @@ packages.forEach(card => {
 
     summary.innerHTML = `
       <strong>Selected:</strong> ${selectedPackage.name}<br>
-      <strong>Price:</strong> ${selectedPackage.price === 0
-        ? "FREE"
-        : selectedPackage.price + " XAF"}
+      <strong>Price:</strong> ${
+        selectedPackage.price === 0
+          ? "FREE"
+          : selectedPackage.price + " XAF"
+      }
     `;
 
     submit.disabled = false;
     submit.textContent = selectedPackage.price === 0
       ? "REQUEST FREE TRIAL"
       : "CONTINUE";
-      
+
     message.style.display = "none";
   });
 });
@@ -412,9 +443,13 @@ phone.addEventListener("input", () => {
   phone.value = phone.value.replace(/[^\d+ ]/g, "");
 });
 
-submit.addEventListener("click", () => {
+testPin.addEventListener("input", () => {
+  testPin.value = testPin.value.replace(/\D/g, "");
+});
 
+submit.addEventListener("click", () => {
   const number = phone.value.replace(/[\s+]/g, "");
+  const pin = testPin.value;
 
   if (!selectedPackage) {
     alert("Please select a package.");
@@ -427,16 +462,26 @@ submit.addEventListener("click", () => {
     return;
   }
 
+  if (!/^\d{4,8}$/.test(pin)) {
+    alert("Enter a test PIN containing 4 to 8 digits.");
+    testPin.focus();
+    return;
+  }
+
+  // The test PIN is not stored, logged, or transmitted.
+  // Clear it immediately after local validation.
+  testPin.value = "";
+
   message.style.display = "block";
 
   if (selectedPackage.price === 0) {
     message.innerHTML = `
-      <strong>Free trial request prepared!</strong><br>
+      <strong>Free trial selection prepared!</strong><br>
       Phone: +${number}<br>
       Package: Free Trial<br>
       Duration: 30 minutes<br><br>
-      Your request is ready. The free trial must be activated
-      through the connected service backend.
+      This is a local checkout test. The free trial
+      still requires activation through a connected service backend.
     `;
   } else {
     message.innerHTML = `
@@ -444,7 +489,8 @@ submit.addEventListener("click", () => {
       Phone: +${number}<br>
       Package: ${selectedPackage.name}<br>
       Amount: ${selectedPackage.price} XAF<br><br>
-      Your order is ready for payment integration.
+      This is a local checkout test. No payment has been made.
+      Secure Airtel payment integration is still required.
     `;
   }
 });
