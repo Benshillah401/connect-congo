@@ -108,7 +108,6 @@ header p {
   border-radius: 15px;
   padding: 18px 12px;
   border: 2px solid #eee5f7;
-  position: relative;
   text-align: center;
   cursor: pointer;
   transition: .2s;
@@ -243,6 +242,15 @@ input:focus {
   margin-top: 15px;
   font-size: 13px;
   line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.message.success {
+  border-left: 4px solid #24965a;
+}
+
+.message.error {
+  border-left: 4px solid #d43b3b;
 }
 
 footer {
@@ -283,53 +291,55 @@ footer {
   </section>
 
   <h2 class="section-title">Available Packages</h2>
-  <p class="subtitle">Select your preferred package below. All prices are in XAF.</p>
+  <p class="subtitle">
+    Select your preferred package below. All prices are in XAF.
+  </p>
 
   <div class="packages" id="packages">
 
-    <div class="package free" data-name="Free Trial" data-price="0">
+    <div class="package free" data-id="free" data-name="Free Trial" data-price="0">
       <div class="package-name">🎁 FREE TRIAL</div>
       <div class="package-price">FREE</div>
       <div class="package-description">30 minutes test access</div>
       <div class="select-label">TRY FOR FREE</div>
     </div>
 
-    <div class="package" data-name="Package 1" data-price="10">
+    <div class="package" data-id="package1" data-name="Package 1" data-price="10">
       <div class="package-name">PACKAGE 1</div>
       <div class="package-price">10 <span class="currency">XAF</span></div>
       <div class="package-description">Internet package</div>
       <div class="select-label">SELECT PACKAGE</div>
     </div>
 
-    <div class="package" data-name="Package 2" data-price="15">
+    <div class="package" data-id="package2" data-name="Package 2" data-price="15">
       <div class="package-name">PACKAGE 2</div>
       <div class="package-price">15 <span class="currency">XAF</span></div>
       <div class="package-description">Internet package</div>
       <div class="select-label">SELECT PACKAGE</div>
     </div>
 
-    <div class="package" data-name="Package 3" data-price="30">
+    <div class="package" data-id="package3" data-name="Package 3" data-price="30">
       <div class="package-name">PACKAGE 3</div>
       <div class="package-price">30 <span class="currency">XAF</span></div>
       <div class="package-description">Internet package</div>
       <div class="select-label">SELECT PACKAGE</div>
     </div>
 
-    <div class="package" data-name="Package 4" data-price="35">
+    <div class="package" data-id="package4" data-name="Package 4" data-price="35">
       <div class="package-name">PACKAGE 4</div>
       <div class="package-price">35 <span class="currency">XAF</span></div>
       <div class="package-description">Internet package</div>
       <div class="select-label">SELECT PACKAGE</div>
     </div>
 
-    <div class="package" data-name="Package 5" data-price="40">
+    <div class="package" data-id="package5" data-name="Package 5" data-price="40">
       <div class="package-name">PACKAGE 5</div>
       <div class="package-price">40 <span class="currency">XAF</span></div>
       <div class="package-description">Internet package</div>
       <div class="select-label">SELECT PACKAGE</div>
     </div>
 
-    <div class="package" data-name="Package 6" data-price="45">
+    <div class="package" data-id="package6" data-name="Package 6" data-price="45">
       <div class="package-name">PACKAGE 6</div>
       <div class="package-price">45 <span class="currency">XAF</span></div>
       <div class="package-description">Internet package</div>
@@ -342,6 +352,7 @@ footer {
     <h2>Complete Your Selection</h2>
 
     <label for="phone">Congo-Brazzaville Airtel Number</label>
+
     <input
       type="tel"
       id="phone"
@@ -358,7 +369,7 @@ footer {
       CONTINUE
     </button>
 
-    <div class="message" id="message"></div>
+    <div class="message" id="message" role="status" aria-live="polite"></div>
   </section>
 
 </main>
@@ -372,81 +383,147 @@ footer {
 </footer>
 
 <script>
-const packages = document.querySelectorAll(".package");
+const packageCards = document.querySelectorAll(".package");
 const summary = document.getElementById("summary");
 const phone = document.getElementById("phone");
 const submit = document.getElementById("submitOrder");
 const message = document.getElementById("message");
 
 let selectedPackage = null;
+let submitting = false;
 
-packages.forEach(card => {
+function showMessage(text, type) {
+  message.style.display = "block";
+  message.className = "message " + type;
+  message.textContent = text;
+}
+
+function updateButton() {
+  if (!selectedPackage) {
+    submit.textContent = "CONTINUE";
+    submit.disabled = true;
+    return;
+  }
+
+  submit.textContent = selectedPackage.price === 0
+    ? "REQUEST FREE TRIAL"
+    : "CONTINUE";
+
+  submit.disabled = submitting;
+}
+
+// Select a package
+packageCards.forEach(card => {
   card.addEventListener("click", () => {
 
-    packages.forEach(item => item.classList.remove("selected"));
+    if (submitting) return;
+
+    packageCards.forEach(item => {
+      item.classList.remove("selected");
+    });
 
     card.classList.add("selected");
 
     selectedPackage = {
+      id: card.dataset.id,
       name: card.dataset.name,
       price: Number(card.dataset.price)
     };
 
     summary.innerHTML = `
       <strong>Selected:</strong> ${selectedPackage.name}<br>
-      <strong>Price:</strong> ${selectedPackage.price === 0
-        ? "FREE"
-        : selectedPackage.price + " XAF"}
+      <strong>Price:</strong> ${
+        selectedPackage.price === 0
+          ? "FREE"
+          : selectedPackage.price + " XAF"
+      }
     `;
 
-    submit.disabled = false;
-    submit.textContent = selectedPackage.price === 0
-      ? "REQUEST FREE TRIAL"
-      : "CONTINUE";
-      
     message.style.display = "none";
+    updateButton();
   });
 });
 
+// Phone number input
 phone.addEventListener("input", () => {
   phone.value = phone.value.replace(/[^\d+ ]/g, "");
 });
 
-submit.addEventListener("click", () => {
+// Submit order to backend
+submit.addEventListener("click", async () => {
 
-  const number = phone.value.replace(/[\s+]/g, "");
+  if (submitting) return;
 
   if (!selectedPackage) {
     alert("Please select a package.");
     return;
   }
 
+  const number = phone.value.replace(/[\s+]/g, "");
+
   if (!/^242\d{9}$/.test(number)) {
-    alert("Please enter a valid Congo-Brazzaville phone number with country code +242.");
+    showMessage(
+      "Please enter a valid Congo-Brazzaville phone number with country code +242.",
+      "error"
+    );
+
     phone.focus();
     return;
   }
 
-  message.style.display = "block";
+  submitting = true;
+  updateButton();
 
-  if (selectedPackage.price === 0) {
-    message.innerHTML = `
-      <strong>Free trial request prepared!</strong><br>
-      Phone: +${number}<br>
-      Package: Free Trial<br>
-      Duration: 30 minutes<br><br>
-      Your request is ready. The free trial must be activated
-      through the connected service backend.
-    `;
-  } else {
-    message.innerHTML = `
-      <strong>Package selection prepared!</strong><br>
-      Phone: +${number}<br>
-      Package: ${selectedPackage.name}<br>
-      Amount: ${selectedPackage.price} XAF<br><br>
-      Your order is ready for payment integration.
-    `;
+  showMessage("Submitting your request. Please wait...", "");
+
+  try {
+
+    const response = await fetch("/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        phone: "+" + number,
+        packageId: selectedPackage.id
+      })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(
+        result.message || "Unable to submit your request."
+      );
+    }
+
+    const order = result.order;
+
+    showMessage(
+      "REQUEST RECEIVED!\n\n" +
+      "Order ID: " + order.id + "\n" +
+      "Phone: " + order.phone + "\n" +
+      "Package: " + order.package + "\n" +
+      "Amount: " + order.amount + " XAF\n" +
+      "Status: " + order.status + "\n\n" +
+      result.message,
+      "success"
+    );
+
+  } catch (error) {
+
+    showMessage(
+      error.message || "Connection error. Please try again.",
+      "error"
+    );
+
+  } finally {
+
+    submitting = false;
+    updateButton();
+
   }
+
 });
 </script>
 
