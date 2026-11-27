@@ -37,10 +37,20 @@ header {
   font-size: 27px;
   font-weight: 900;
   letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 .logo span {
   color: #ff9b36;
+}
+
+.satellite-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
 }
 
 header p {
@@ -64,13 +74,19 @@ header p {
   padding: 22px 14px;
 }
 
+/* SATELLITE HERO */
+
 .trial-banner {
-  background: linear-gradient(120deg, #ff7900, #ff9d35);
+  background:
+    radial-gradient(circle at 85% 20%, rgba(255,255,255,.18), transparent 30%),
+    linear-gradient(120deg, #ff7900, #7136a8);
   color: white;
-  padding: 20px;
+  padding: 22px 18px;
   border-radius: 17px;
   margin-bottom: 25px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .trial-banner h2 {
@@ -81,6 +97,13 @@ header p {
 .trial-banner p {
   margin-top: 8px;
   font-size: 14px;
+}
+
+.satellite-art {
+  display: block;
+  width: 135px;
+  height: 105px;
+  margin: 8px auto 0;
 }
 
 .section-title {
@@ -176,7 +199,16 @@ footer {
   line-height: 1.8;
 }
 
-/* CHECKOUT PAGE */
+.footer-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+/* CHECKOUT SCREEN */
 
 #checkoutPage {
   display: none;
@@ -236,13 +268,13 @@ footer {
   line-height: 1.8;
 }
 
-.package-selected-name {
+.selected-summary .package-selected-name {
   font-size: 19px;
   font-weight: 900;
   color: var(--purple);
 }
 
-.package-selected-price {
+.selected-summary .package-selected-price {
   font-size: 25px;
   font-weight: 900;
   color: var(--orange);
@@ -288,7 +320,21 @@ label {
   margin: 0;
 }
 
-.payment-note {
+.pin-input {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.pin-input:focus {
+  outline: none;
+  border: 2px solid var(--purple);
+}
+
+.pin-note {
   background: #fff3e7;
   border-left: 4px solid var(--orange);
   color: #6d3a0b;
@@ -380,7 +426,24 @@ label {
 <div id="packagesPage">
 
 <header>
-  <div class="logo">CONNECT <span>CONGO</span></div>
+  <div class="logo">
+    <svg class="satellite-icon" viewBox="0 0 64 64" fill="none"
+         xmlns="http://www.w3.org/2000/svg" aria-label="Satellite icon">
+      <g stroke="white" stroke-width="2.8" stroke-linejoin="round">
+        <rect x="24" y="23" width="17" height="17" rx="3"
+              transform="rotate(-35 32.5 31.5)" fill="#ff9b36"/>
+        <path d="M22 16L13 7L7 13L16 22"/>
+        <path d="M42 42L51 51L57 45L48 36"/>
+        <path d="M23 42L13 52"/>
+        <path d="M18 36L9 45"/>
+        <path d="M44 21L54 11"/>
+        <path d="M50 27L59 18"/>
+        <path d="M30 10L33 5"/>
+        <path d="M10 30L5 33"/>
+      </g>
+    </svg>
+    <div>CONNECT <span>CONGO</span></div>
+  </div>
   <p>Choose your internet package</p>
   <div class="country">🇨🇬 Congo-Brazzaville</div>
 </header>
@@ -390,6 +453,32 @@ label {
   <section class="trial-banner">
     <h2>🎁 FREE 30-MINUTE TRIAL</h2>
     <p>Try our service with the free test package.</p>
+
+    <svg class="satellite-art" viewBox="0 0 180 130"
+         xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="white" stroke-width="2.5"
+         stroke-linejoin="round">
+        <path d="M20 25L34 14M150 30L163 17M22 100L34 110M147 96L160 108"
+              opacity=".6"/>
+        <path d="M76 57L57 39L43 53L62 72Z"
+              fill="#7136a8" stroke="white"/>
+        <path d="M104 73L123 91L137 77L118 58Z"
+              fill="#7136a8" stroke="white"/>
+        <rect x="76" y="47" width="31" height="31" rx="5"
+              transform="rotate(-35 91.5 62.5)"
+              fill="#ff9b36" stroke="white"/>
+        <path d="M89 48L92 32M80 83L67 96M111 47L126 32"
+              stroke-width="3"/>
+        <circle cx="92" cy="63" r="5" fill="white"/>
+        <path d="M17 65Q35 48 52 65M128 65Q145 48 163 65"
+              opacity=".7"/>
+        <path d="M36 83L45 83M140 43L149 43"
+              stroke-width="3"/>
+      </g>
+      <circle cx="30" cy="37" r="2.5" fill="white"/>
+      <circle cx="150" cy="85" r="2.5" fill="white"/>
+      <circle cx="130" cy="16" r="2" fill="white"/>
+    </svg>
   </section>
 
   <h2 class="section-title">AVAILABLE PACKAGES</h2>
@@ -397,42 +486,42 @@ label {
 
   <div class="packages" id="packages">
 
-    <div class="package free" data-name="Free Trial" data-price="0" data-validity="30 minutes">
+    <div class="package free" data-name="Free Trial" data-price="0">
       <div class="package-name">🎁 FREE TRIAL</div>
       <div class="package-price">FREE</div>
       <div class="package-description">30 minutes test access</div>
       <div class="select-label">TRY FOR FREE</div>
     </div>
 
-    <div class="package" data-name="Package 1" data-price="10" data-validity="6 hours">
+    <div class="package" data-name="Package 1" data-price="10">
       <div class="package-name">PACKAGE 1</div>
       <div class="package-price">10 <span class="currency">XAF</span></div>
       <div class="package-description">Valid for 6 hours</div>
       <div class="select-label">SELECT PACKAGE</div>
     </div>
 
-    <div class="package" data-name="Package 2" data-price="15" data-validity="12 hours">
+    <div class="package" data-name="Package 2" data-price="15">
       <div class="package-name">PACKAGE 2</div>
       <div class="package-price">15 <span class="currency">XAF</span></div>
       <div class="package-description">Valid for 12 hours</div>
       <div class="select-label">SELECT PACKAGE</div>
     </div>
 
-    <div class="package" data-name="Package 3" data-price="30" data-validity="1 day">
+    <div class="package" data-name="Package 3" data-price="30">
       <div class="package-name">PACKAGE 3</div>
       <div class="package-price">30 <span class="currency">XAF</span></div>
       <div class="package-description">Valid for 1 day</div>
       <div class="select-label">SELECT PACKAGE</div>
     </div>
 
-    <div class="package" data-name="Package 4" data-price="35" data-validity="1 day and 12 hours">
+    <div class="package" data-name="Package 4" data-price="35">
       <div class="package-name">PACKAGE 4</div>
       <div class="package-price">35 <span class="currency">XAF</span></div>
       <div class="package-description">Valid for 1 day and 12 hours</div>
       <div class="select-label">SELECT PACKAGE</div>
     </div>
 
-    <div class="package" data-name="Package 5" data-price="40" data-validity="Unlimited">
+    <div class="package" data-name="Package 5" data-price="40">
       <div class="package-name">PACKAGE 5</div>
       <div class="package-price">40 <span class="currency">XAF</span></div>
       <div class="package-description">Unlimited</div>
@@ -443,7 +532,21 @@ label {
 </main>
 
 <footer>
-  <strong>CONNECT CONGO</strong><br>
+  <div class="footer-brand">
+    <svg width="24" height="24" viewBox="0 0 64 64"
+         fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M25 24L39 38M25 38L39 24"
+            stroke="#ff9b36" stroke-width="4"/>
+      <path d="M13 13L23 23L17 29L7 19Z"
+            stroke="white" stroke-width="3"/>
+      <path d="M51 51L41 41L47 35L57 45Z"
+            stroke="white" stroke-width="3"/>
+      <rect x="23" y="23" width="18" height="18" rx="3"
+            transform="rotate(-35 32 32)"
+            stroke="white" stroke-width="3"/>
+    </svg>
+    CONNECT CONGO
+  </div>
   Internet Packages | Congo-Brazzaville 🇨🇬<br>
   All prices displayed in XAF.
 </footer>
@@ -458,13 +561,25 @@ label {
   <p>Preparing your selected package...</p>
 </div>
 
-<!-- CHECKOUT PAGE -->
+<!-- SEPARATE CHECKOUT PAGE -->
 
 <div id="checkoutPage">
 
   <div class="checkout-header">
-    <div class="logo">CONNECT <span>CONGO</span></div>
-    <p>Package checkout</p>
+    <div class="logo">
+      <svg class="satellite-icon" viewBox="0 0 64 64"
+           fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="24" y="23" width="17" height="17" rx="3"
+              transform="rotate(-35 32.5 31.5)"
+              fill="#ff9b36" stroke="white" stroke-width="2.5"/>
+        <path d="M22 16L13 7L7 13L16 22M42 42L51 51L57 45L48 36"
+              stroke="white" stroke-width="2.5"/>
+        <path d="M23 42L13 52M44 21L54 11"
+              stroke="white" stroke-width="2.5"/>
+      </svg>
+      <div>CONNECT <span>CONGO</span></div>
+    </div>
+    <p>Secure package selection</p>
   </div>
 
   <main class="checkout-container">
@@ -482,7 +597,6 @@ label {
         <div>YOUR SELECTED PACKAGE</div>
         <div class="package-selected-name" id="selectedName"></div>
         <div class="package-selected-price" id="selectedPrice"></div>
-        <div id="selectedValidity"></div>
       </div>
 
       <form id="checkoutForm">
@@ -502,11 +616,24 @@ label {
           >
         </div>
 
-        <div class="payment-note">
-          Your number will be used for the package request.
-          Never enter or share your Airtel Money PIN on this website.
-          Any payment must be completed through an official secure
-          Airtel payment process.
+        <label for="testPin">PIN (TEST ONLY)</label>
+
+        <input
+          class="pin-input"
+          type="password"
+          id="testPin"
+          placeholder="Enter a test PIN only"
+          maxlength="8"
+          inputmode="numeric"
+          autocomplete="off"
+          required
+        >
+
+        <div class="pin-note">
+          This is a test-only field. Never enter your real Airtel Money PIN.
+          The test PIN is checked locally in your browser and is never
+          stored or transmitted. Real payments must use an authorized
+          secure Airtel payment process.
         </div>
 
         <button type="submit" class="continue-btn">
@@ -529,29 +656,26 @@ label {
 
 <script>
 const packageCards = document.querySelectorAll(".package");
-
 const packagesPage = document.getElementById("packagesPage");
 const checkoutPage = document.getElementById("checkoutPage");
 const loadingScreen = document.getElementById("loadingScreen");
 
 const selectedName = document.getElementById("selectedName");
 const selectedPrice = document.getElementById("selectedPrice");
-const selectedValidity = document.getElementById("selectedValidity");
 
 const backButton = document.getElementById("backButton");
 const checkoutForm = document.getElementById("checkoutForm");
 
 const phone = document.getElementById("phone");
+const testPin = document.getElementById("testPin");
 const resultMessage = document.getElementById("resultMessage");
 
 let selectedPackage = null;
 
 function openCheckout(card) {
-
   selectedPackage = {
     name: card.dataset.name,
-    price: Number(card.dataset.price),
-    validity: card.dataset.validity
+    price: Number(card.dataset.price)
   };
 
   selectedName.textContent = selectedPackage.name;
@@ -559,9 +683,6 @@ function openCheckout(card) {
   selectedPrice.textContent = selectedPackage.price === 0
     ? "FREE"
     : selectedPackage.price + " XAF";
-
-  selectedValidity.textContent =
-    "Validity: " + selectedPackage.validity;
 
   resultMessage.style.display = "none";
   checkoutForm.reset();
@@ -593,11 +714,15 @@ phone.addEventListener("input", () => {
   phone.value = phone.value.replace(/\D/g, "").slice(0, 9);
 });
 
-checkoutForm.addEventListener("submit", event => {
+testPin.addEventListener("input", () => {
+  testPin.value = testPin.value.replace(/\D/g, "").slice(0, 8);
+});
 
+checkoutForm.addEventListener("submit", event => {
   event.preventDefault();
 
   const localNumber = phone.value.trim();
+  const testPinValue = testPin.value.trim();
 
   if (!selectedPackage) {
     alert("Please select a package first.");
@@ -610,22 +735,32 @@ checkoutForm.addEventListener("submit", event => {
     return;
   }
 
+  if (!/^\d{4,8}$/.test(testPinValue)) {
+    alert("Enter a test PIN containing 4 to 8 digits.");
+    testPin.focus();
+    return;
+  }
+
   const fullNumber = "+242" + localNumber;
+
+  // Never store or send the test PIN.
+  testPin.value = "";
 
   resultMessage.style.display = "block";
 
   resultMessage.textContent =
-    "Selection prepared. Number: " + fullNumber +
+    "Selection prepared successfully! " +
+    "Airtel Number: " + fullNumber +
     ". Package: " + selectedPackage.name +
     ". Amount: " +
     (selectedPackage.price === 0
       ? "FREE"
       : selectedPackage.price + " XAF") +
-    ". Validity: " + selectedPackage.validity +
-    ". This is only a checkout interface test. No payment has been made and no service has been activated.";
+    ". This is a checkout interface test. " +
+    "No payment has been made and no service has been activated.";
 
+  checkoutForm.reset();
 });
-
 </script>
 
 </body>
