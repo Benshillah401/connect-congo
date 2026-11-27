@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 
 const app = express();
 const PORT = process.env.PORT || 10000;
@@ -7,10 +8,26 @@ const PORT = process.env.PORT || 10000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve the website
-app.use(express.static(path.join(__dirname, "public")));
+// Public website folder
+const publicFolder = path.join(__dirname, "public");
 
-// Connect Congo packages
+// Serve website files, CSS, JavaScript and images
+app.use(express.static(publicFolder));
+
+// Explicit satellite image route
+app.get("/satellite.jpg", (req, res) => {
+  const imagePath = path.join(publicFolder, "satellite.jpg");
+
+  if (!fs.existsSync(imagePath)) {
+    return res.status(404).send(
+      "Satellite image not found. Check that public/satellite.jpg exists."
+    );
+  }
+
+  res.sendFile(imagePath);
+});
+
+// CONNECT CONGO PACKAGES
 const packages = [
   {
     id: "free",
@@ -27,7 +44,7 @@ const packages = [
     data: "Internet Package",
     price: 10,
     currency: "XAF",
-    duration: "To be configured",
+    duration: "6 hours",
     type: "paid"
   },
   {
@@ -36,7 +53,7 @@ const packages = [
     data: "Internet Package",
     price: 15,
     currency: "XAF",
-    duration: "To be configured",
+    duration: "12 hours",
     type: "paid"
   },
   {
@@ -45,7 +62,7 @@ const packages = [
     data: "Internet Package",
     price: 30,
     currency: "XAF",
-    duration: "To be configured",
+    duration: "1 day",
     type: "paid"
   },
   {
@@ -54,7 +71,7 @@ const packages = [
     data: "Internet Package",
     price: 35,
     currency: "XAF",
-    duration: "To be configured",
+    duration: "1 day and 12 hours",
     type: "paid"
   },
   {
@@ -63,25 +80,16 @@ const packages = [
     data: "Internet Package",
     price: 40,
     currency: "XAF",
-    duration: "To be configured",
-    type: "paid"
-  },
-  {
-    id: "package6",
-    name: "Package 6",
-    data: "Internet Package",
-    price: 45,
-    currency: "XAF",
-    duration: "To be configured",
+    duration: "Unlimited",
     type: "paid"
   }
 ];
 
-// Temporary order storage.
-// Use a database before accepting real customer orders.
+// Temporary order storage
+// Replace with a database before handling real orders.
 const orders = [];
 
-// Health check
+// HEALTH CHECK
 app.get("/api/health", (req, res) => {
   res.json({
     success: true,
@@ -91,7 +99,7 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-// Get all packages
+// GET PACKAGES
 app.get("/api/packages", (req, res) => {
   res.json({
     success: true,
@@ -100,7 +108,7 @@ app.get("/api/packages", (req, res) => {
   });
 });
 
-// Submit an order or trial request
+// SUBMIT ORDER OR TRIAL REQUEST
 app.post("/api/orders", (req, res) => {
   const { phone, packageId } = req.body;
 
@@ -111,7 +119,6 @@ app.post("/api/orders", (req, res) => {
     });
   }
 
-  // Accept Congo numbers with or without +242
   const normalizedPhone = String(phone).replace(/[\s+()-]/g, "");
 
   if (!/^242\d{9}$/.test(normalizedPhone)) {
@@ -157,7 +164,7 @@ app.post("/api/orders", (req, res) => {
   });
 });
 
-// Check order status
+// CHECK ORDER STATUS
 app.get("/api/orders/:id", (req, res) => {
   const order = orders.find(
     item => item.id === req.params.id
@@ -176,14 +183,19 @@ app.get("/api/orders/:id", (req, res) => {
   });
 });
 
-// Website homepage
+// WEBSITE HOMEPAGE
 app.get("/", (req, res) => {
   res.sendFile(
-    path.join(__dirname, "public", "index.html")
+    path.join(publicFolder, "index.html")
   );
 });
 
-// Start server
+// START SERVER
 app.listen(PORT, "0.0.0.0", () => {
   console.log("Connect Congo server running on port " + PORT);
+  console.log("Public folder: " + publicFolder);
+  console.log(
+    "Satellite image exists: " +
+    fs.existsSync(path.join(publicFolder, "satellite.jpg"))
+  );
 });
