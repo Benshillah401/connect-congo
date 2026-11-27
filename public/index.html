@@ -176,7 +176,7 @@ footer {
   line-height: 1.8;
 }
 
-/* CHECKOUT SCREEN */
+/* CHECKOUT PAGE */
 
 #checkoutPage {
   display: none;
@@ -236,13 +236,13 @@ footer {
   line-height: 1.8;
 }
 
-.selected-summary .package-selected-name {
+.package-selected-name {
   font-size: 19px;
   font-weight: 900;
   color: var(--purple);
 }
 
-.selected-summary .package-selected-price {
+.package-selected-price {
   font-size: 25px;
   font-weight: 900;
   color: var(--orange);
@@ -288,21 +288,7 @@ label {
   margin: 0;
 }
 
-.pin-input {
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 16px;
-  font-size: 16px;
-  margin-bottom: 12px;
-}
-
-.pin-input:focus {
-  outline: none;
-  border: 2px solid var(--purple);
-}
-
-.pin-note {
+.payment-note {
   background: #fff3e7;
   border-left: 4px solid var(--orange);
   color: #6d3a0b;
@@ -411,52 +397,45 @@ label {
 
   <div class="packages" id="packages">
 
-    <div class="package free" data-name="Free Trial" data-price="0">
+    <div class="package free" data-name="Free Trial" data-price="0" data-validity="30 minutes">
       <div class="package-name">🎁 FREE TRIAL</div>
       <div class="package-price">FREE</div>
       <div class="package-description">30 minutes test access</div>
       <div class="select-label">TRY FOR FREE</div>
     </div>
 
-    <div class="package" data-name="Package 1" data-price="10">
+    <div class="package" data-name="Package 1" data-price="10" data-validity="6 hours">
       <div class="package-name">PACKAGE 1</div>
       <div class="package-price">10 <span class="currency">XAF</span></div>
-      <div class="package-description">Internet package</div>
+      <div class="package-description">Valid for 6 hours</div>
       <div class="select-label">SELECT PACKAGE</div>
     </div>
 
-    <div class="package" data-name="Package 2" data-price="15">
+    <div class="package" data-name="Package 2" data-price="15" data-validity="12 hours">
       <div class="package-name">PACKAGE 2</div>
       <div class="package-price">15 <span class="currency">XAF</span></div>
-      <div class="package-description">Internet package</div>
+      <div class="package-description">Valid for 12 hours</div>
       <div class="select-label">SELECT PACKAGE</div>
     </div>
 
-    <div class="package" data-name="Package 3" data-price="30">
+    <div class="package" data-name="Package 3" data-price="30" data-validity="1 day">
       <div class="package-name">PACKAGE 3</div>
       <div class="package-price">30 <span class="currency">XAF</span></div>
-      <div class="package-description">Internet package</div>
+      <div class="package-description">Valid for 1 day</div>
       <div class="select-label">SELECT PACKAGE</div>
     </div>
 
-    <div class="package" data-name="Package 4" data-price="35">
+    <div class="package" data-name="Package 4" data-price="35" data-validity="1 day and 12 hours">
       <div class="package-name">PACKAGE 4</div>
       <div class="package-price">35 <span class="currency">XAF</span></div>
-      <div class="package-description">Internet package</div>
+      <div class="package-description">Valid for 1 day and 12 hours</div>
       <div class="select-label">SELECT PACKAGE</div>
     </div>
 
-    <div class="package" data-name="Package 5" data-price="40">
+    <div class="package" data-name="Package 5" data-price="40" data-validity="Unlimited">
       <div class="package-name">PACKAGE 5</div>
       <div class="package-price">40 <span class="currency">XAF</span></div>
-      <div class="package-description">Internet package</div>
-      <div class="select-label">SELECT PACKAGE</div>
-    </div>
-
-    <div class="package" data-name="Package 6" data-price="45">
-      <div class="package-name">PACKAGE 6</div>
-      <div class="package-price">45 <span class="currency">XAF</span></div>
-      <div class="package-description">Internet package</div>
+      <div class="package-description">Unlimited</div>
       <div class="select-label">SELECT PACKAGE</div>
     </div>
 
@@ -479,13 +458,13 @@ label {
   <p>Preparing your selected package...</p>
 </div>
 
-<!-- SEPARATE CHECKOUT PAGE -->
+<!-- CHECKOUT PAGE -->
 
 <div id="checkoutPage">
 
   <div class="checkout-header">
     <div class="logo">CONNECT <span>CONGO</span></div>
-    <p>Secure package selection</p>
+    <p>Package checkout</p>
   </div>
 
   <main class="checkout-container">
@@ -503,6 +482,7 @@ label {
         <div>YOUR SELECTED PACKAGE</div>
         <div class="package-selected-name" id="selectedName"></div>
         <div class="package-selected-price" id="selectedPrice"></div>
+        <div id="selectedValidity"></div>
       </div>
 
       <form id="checkoutForm">
@@ -522,24 +502,11 @@ label {
           >
         </div>
 
-        <label for="testPin">PIN (TEST ONLY)</label>
-
-        <input
-          class="pin-input"
-          type="password"
-          id="testPin"
-          placeholder="Enter a test PIN only"
-          maxlength="8"
-          inputmode="numeric"
-          autocomplete="off"
-          required
-        >
-
-        <div class="pin-note">
-          This is a test-only field. Never enter your real Airtel Money PIN.
-          The test PIN is checked locally in your browser and is never
-          stored or transmitted. Real payments must use an authorized
-          secure Airtel payment process.
+        <div class="payment-note">
+          Your number will be used for the package request.
+          Never enter or share your Airtel Money PIN on this website.
+          Any payment must be completed through an official secure
+          Airtel payment process.
         </div>
 
         <button type="submit" class="continue-btn">
@@ -562,26 +529,29 @@ label {
 
 <script>
 const packageCards = document.querySelectorAll(".package");
+
 const packagesPage = document.getElementById("packagesPage");
 const checkoutPage = document.getElementById("checkoutPage");
 const loadingScreen = document.getElementById("loadingScreen");
 
 const selectedName = document.getElementById("selectedName");
 const selectedPrice = document.getElementById("selectedPrice");
+const selectedValidity = document.getElementById("selectedValidity");
 
 const backButton = document.getElementById("backButton");
 const checkoutForm = document.getElementById("checkoutForm");
 
 const phone = document.getElementById("phone");
-const testPin = document.getElementById("testPin");
 const resultMessage = document.getElementById("resultMessage");
 
 let selectedPackage = null;
 
 function openCheckout(card) {
+
   selectedPackage = {
     name: card.dataset.name,
-    price: Number(card.dataset.price)
+    price: Number(card.dataset.price),
+    validity: card.dataset.validity
   };
 
   selectedName.textContent = selectedPackage.name;
@@ -589,6 +559,9 @@ function openCheckout(card) {
   selectedPrice.textContent = selectedPackage.price === 0
     ? "FREE"
     : selectedPackage.price + " XAF";
+
+  selectedValidity.textContent =
+    "Validity: " + selectedPackage.validity;
 
   resultMessage.style.display = "none";
   checkoutForm.reset();
@@ -620,15 +593,11 @@ phone.addEventListener("input", () => {
   phone.value = phone.value.replace(/\D/g, "").slice(0, 9);
 });
 
-testPin.addEventListener("input", () => {
-  testPin.value = testPin.value.replace(/\D/g, "").slice(0, 8);
-});
-
 checkoutForm.addEventListener("submit", event => {
+
   event.preventDefault();
 
   const localNumber = phone.value.trim();
-  const testPinValue = testPin.value.trim();
 
   if (!selectedPackage) {
     alert("Please select a package first.");
@@ -641,34 +610,22 @@ checkoutForm.addEventListener("submit", event => {
     return;
   }
 
-  if (!/^\d{4,8}$/.test(testPinValue)) {
-    alert("Enter a test PIN containing 4 to 8 digits.");
-    testPin.focus();
-    return;
-  }
-
   const fullNumber = "+242" + localNumber;
-
-  // Never store or send the test PIN.
-  testPin.value = "";
 
   resultMessage.style.display = "block";
 
-  resultMessage.innerHTML = `
-    <strong>Selection prepared successfully!</strong><br><br>
-    Airtel Number: ${fullNumber}<br>
-    Package: ${selectedPackage.name}<br>
-    Amount: ${
-      selectedPackage.price === 0
-        ? "FREE"
-        : selectedPackage.price + " XAF"
-    }<br><br>
-    This is a checkout interface test.
-    No payment has been made and no service has been activated.
-  `;
+  resultMessage.textContent =
+    "Selection prepared. Number: " + fullNumber +
+    ". Package: " + selectedPackage.name +
+    ". Amount: " +
+    (selectedPackage.price === 0
+      ? "FREE"
+      : selectedPackage.price + " XAF") +
+    ". Validity: " + selectedPackage.validity +
+    ". This is only a checkout interface test. No payment has been made and no service has been activated.";
 
-  checkoutForm.reset();
 });
+
 </script>
 
 </body>
