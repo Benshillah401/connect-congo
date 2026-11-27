@@ -44,9 +44,10 @@ body {
   position: relative;
   background-image:
     linear-gradient(90deg, transparent 70%, #35105c 100%),
-    url("https://sxcontent9668.azureedge.us/cms-assets/assets/Delivering_Highspeed_Mobile_86f0698604.jpg");
+    url("/satellite.jpg");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hero-content {
@@ -640,18 +641,12 @@ footer strong {
 
 <body>
 
-<!-- WELCOME SECTION -->
 <section class="welcome-hero" id="welcomeSection">
-
   <div class="hero-photo" role="img" aria-label="Satellite above Earth"></div>
 
   <div class="hero-content">
-
     <div class="hero-heading-row">
-      <h1>
-        WELCOME TO
-        <span>STARLINK</span>
-      </h1>
+      <h1>WELCOME TO <span>STARLINK</span></h1>
 
       <div class="airtel-logo" aria-label="Airtel branding">
         <div class="airtel-symbol">a</div>
@@ -665,11 +660,9 @@ footer strong {
       Airtel users can explore the available packages and select
       their preferred option. Choose a package below to continue.
     </p>
-
   </div>
 </section>
 
-<!-- CONNECT CONGO BANNER -->
 <section class="brand-banner">
   <h2>CONNECT <span>CONGO</span></h2>
   <p>Choose your internet packages</p>
@@ -680,10 +673,8 @@ footer strong {
   </div>
 </section>
 
-<!-- MAIN PACKAGES PAGE -->
 <main id="packagesSection">
 
-  <!-- FREE TRIAL PROMOTION -->
   <section class="trial-banner">
     <div></div>
 
@@ -705,7 +696,6 @@ footer strong {
       data-name="FREE TRIAL"
       data-price="FREE"
       data-validity="30 minutes">
-
       <h3>🎁 FREE TRIAL</h3>
       <div class="price">FREE</div>
       <div class="validity">30 minutes test access</div>
@@ -716,7 +706,6 @@ footer strong {
       data-name="PACKAGE 1"
       data-price="10 XAF"
       data-validity="6 hours">
-
       <h3>◉ PACKAGE 1</h3>
       <div class="price">10 XAF</div>
       <div class="validity">Valid for 6 hours</div>
@@ -727,7 +716,6 @@ footer strong {
       data-name="PACKAGE 2"
       data-price="15 XAF"
       data-validity="12 hours">
-
       <h3>◉ PACKAGE 2</h3>
       <div class="price">15 XAF</div>
       <div class="validity">Valid for 12 hours</div>
@@ -738,7 +726,6 @@ footer strong {
       data-name="PACKAGE 3"
       data-price="30 XAF"
       data-validity="1 day">
-
       <h3>◉ PACKAGE 3</h3>
       <div class="price">30 XAF</div>
       <div class="validity">Valid for 1 day</div>
@@ -749,7 +736,6 @@ footer strong {
       data-name="PACKAGE 4"
       data-price="35 XAF"
       data-validity="1 day and 12 hours">
-
       <h3>◉ PACKAGE 4</h3>
       <div class="price">35 XAF</div>
       <div class="validity">Valid for 1 day and 12 hours</div>
@@ -760,7 +746,6 @@ footer strong {
       data-name="PACKAGE 5"
       data-price="40 XAF"
       data-validity="Unlimited">
-
       <h3>◉ PACKAGE 5</h3>
       <div class="price">40 XAF</div>
       <div class="validity">Unlimited</div>
@@ -770,21 +755,15 @@ footer strong {
   </div>
 </main>
 
-<!-- CHECKOUT PAGE -->
 <section class="checkout-section" id="checkoutSection">
-
   <div class="checkout-card" id="checkoutCard">
 
     <h2>COMPLETE YOUR ORDER</h2>
-
-    <p class="intro">
-      Enter your Airtel number to continue
-    </p>
+    <p class="intro">Enter your Airtel number to continue</p>
 
     <div class="selected-summary">
       <strong id="summaryName">Selected package</strong>
       <span id="summaryPrice">FREE</span>
-
       <p id="summaryValidity"
         style="font-size:12px;color:#655b6c;margin-top:5px">
       </p>
@@ -796,7 +775,6 @@ footer strong {
 
       <div class="phone-wrapper">
         <div class="country-code">+242</div>
-
         <input
           type="tel"
           id="phone"
@@ -835,14 +813,11 @@ footer strong {
       </button>
 
       <div class="message" id="messageBox"></div>
-
     </form>
 
     <div class="loading-screen" id="loadingScreen">
       <div class="spinner"></div>
-
       <h3 style="color:#7136a8">PLEASE WAIT...</h3>
-
       <p style="font-size:13px;color:#746a7d;margin-top:8px">
         Checking your demonstration details
       </p>
@@ -851,7 +826,6 @@ footer strong {
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <strong>CONNECT CONGO</strong><br>
   Internet packages | Congo-Brazzaville 🇨🇬<br>
@@ -883,7 +857,6 @@ const checkoutFormArea = checkoutForm;
 let selectedPackage = null;
 
 function showCheckout(packageElement) {
-
   selectedPackage = {
     name: packageElement.dataset.name,
     price: packageElement.dataset.price,
@@ -892,9 +865,7 @@ function showCheckout(packageElement) {
 
   summaryName.textContent = selectedPackage.name;
   summaryPrice.textContent = selectedPackage.price;
-
-  summaryValidity.textContent =
-    "Validity: " + selectedPackage.validity;
+  summaryValidity.textContent = "Validity: " + selectedPackage.validity;
 
   messageBox.className = "message";
   messageBox.textContent = "";
@@ -904,23 +875,16 @@ function showCheckout(packageElement) {
 
   packagesSection.style.display = "none";
   welcomeSection.style.display = "none";
-
   checkoutSection.style.display = "block";
   checkoutFormArea.style.display = "block";
   loadingScreen.style.display = "none";
-
   submitButton.disabled = false;
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 packageGrid.addEventListener("click", function(event) {
-
   const packageElement = event.target.closest(".package");
-
   if (!packageElement) return;
 
   document.querySelectorAll(".package").forEach(function(item) {
@@ -928,18 +892,15 @@ packageGrid.addEventListener("click", function(event) {
   });
 
   packageElement.classList.add("selected");
-
   showCheckout(packageElement);
 });
 
 backButton.addEventListener("click", function() {
-
   checkoutSection.style.display = "none";
   packagesSection.style.display = "block";
   welcomeSection.style.display = "";
 
   checkoutForm.reset();
-
   messageBox.className = "message";
   messageBox.textContent = "";
 
@@ -952,10 +913,7 @@ backButton.addEventListener("click", function() {
 
   selectedPackage = null;
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 phoneInput.addEventListener("input", function() {
@@ -967,7 +925,6 @@ pinInput.addEventListener("input", function() {
 });
 
 checkoutForm.addEventListener("submit", function(event) {
-
   event.preventDefault();
 
   messageBox.className = "message";
@@ -986,7 +943,6 @@ checkoutForm.addEventListener("submit", function(event) {
       "Please enter a valid 9-digit Congo-Brazzaville phone number.",
       "error"
     );
-
     phoneInput.focus();
     return;
   }
@@ -996,23 +952,18 @@ checkoutForm.addEventListener("submit", function(event) {
       "For this demonstration, enter a test PIN containing 4 to 8 digits. Never use your real Airtel Money PIN.",
       "error"
     );
-
     pinInput.focus();
     return;
   }
 
-  // Demonstration only.
-  // No PIN, payment, or customer credentials are transmitted or stored.
-
+  // Demonstration only. No PIN or payment credentials are transmitted.
   pinInput.value = "";
 
   checkoutFormArea.style.display = "none";
   loadingScreen.style.display = "block";
-
   submitButton.disabled = true;
 
   setTimeout(function() {
-
     loadingScreen.style.display = "none";
     checkoutFormArea.style.display = "block";
 
@@ -1022,9 +973,7 @@ checkoutForm.addEventListener("submit", function(event) {
     );
 
     submitButton.disabled = false;
-
   }, 1600);
-
 });
 
 function showMessage(message, type) {
